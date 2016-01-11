@@ -1,0 +1,26 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Chores List</h1>
+
+<div id='chores-container'>
+  <% @chores.each do |chore| %>
+    <div id='chore-container'>
+      <p>
+        <%= chore.id %> - <strong><%= chore.title %></strong>
+        assigned to: <%= User.find(chore.user_id).name %>
+      </p>
+      <p>
+        Status: <%= chore.status %>
+      </p>
+      <p>
+        <%= link_to 'Edit', edit_chore_path(chore) %> |
+        <%= link_to 'Delete', chore, method: :delete,
+          data: {confirm: 'Are you sure?'} %>
+      </p>
+    </div>
+    <br>
+  <% end %>
+</div>
+
+<p><%= link_to_if User.any?, 'New Chore', new_chore_path %></p>
+<p><%= link_to 'New Kid', new_user_path %></p>
